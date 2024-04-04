@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import AppOne from "./ecoomerce-product/AppOne"
+import { Link } from "react-router-dom";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -76,7 +77,8 @@ function App() {
 
         filteredUsers.map((item) => {
           return (
-            <>
+            <Link to={'/product'} state={item}>
+              {JSON.stringify(item)}
               <div className="hover:shadow-2xl hover:scale-105 p-3 hover:border hover:border-blue-300 max-w-[200px] h-[200px] bg-white ">
                 <img
                   src={item.strCategoryThumb}
@@ -86,7 +88,7 @@ function App() {
                 <h1 className="">{item.strCategory}</h1>
                 <h1 className="">{item.strCategory}</h1>
               </div>
-            </>
+            </Link>
           );
         })
       }
