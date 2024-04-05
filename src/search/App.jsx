@@ -67,6 +67,19 @@ function App() {
           placeholder="Search..."
           className="shadow-xl w-[400px] h-[60px] px-3 py-2 outline-none"
         />
+
+    <div className="flex flex-col gap-2 w-[600px] absolute top-20 h-[300px] overflow-x-scroll ">
+
+        { searchItem.length > 0 &&
+          products.map((item,index)=>{
+            return(<div className="flex gap-3 rounded px-2 py-2 bg-white shadow-md" key={index}>
+              <img src={item.strCategoryThumb} alt="" className="w-12 h-12 rounded-full object-cover" />
+              <p className="">{item.strCategory}</p>
+            </div>)
+          })
+        }
+    </div>
+
       </div>
     <div className=" grid grid-cols-5 my-20 mx-20">
       {
