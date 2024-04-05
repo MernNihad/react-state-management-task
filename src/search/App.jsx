@@ -2,14 +2,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import AppOne from "./ecoomerce-product/AppOne"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Modal from "./Modal";
 
 function App() {
   const [products, setProducts] = useState([]);
   const [searchItem, setSearchItem] = useState('')
   const [filteredUsers, setFilteredProducts] = useState([])
   const [sortToggleBtn, setSortToggleBtn] = useState(false)
-
+  const [modal, setModal] = useState(false)
+  const [details, setDetails] = useState({})
+  const navigate = useNavigate()
   // axios
 
   const fetchData = async () => {
@@ -67,32 +70,35 @@ function App() {
       </div>
     <div className=" grid grid-cols-5 my-20 mx-20">
       {
-        //
-
-        // idCategory
-        // strCategory
-
-        // strCategoryDescription
-        // strCategoryThumb
-
         filteredUsers.map((item) => {
           return (
-            <Link to={'/product'} state={item}>
-              {JSON.stringify(item)}
+            <>
+            {/* <Link to={'/product'}  state={item}> */}
               <div className="hover:shadow-2xl hover:scale-105 p-3 hover:border hover:border-blue-300 max-w-[200px] h-[200px] bg-white ">
                 <img
+                onClick={()=>navigate('/product')}
                   src={item.strCategoryThumb}
                   alt="loadin"
                   className="object-contain"
-                />
-                <h1 className="">{item.strCategory}</h1>
-                <h1 className="">{item.strCategory}</h1>
+                  />
+                <h1 onClick={()=>navigate('/product' ,{state:item } )} className="">{item.strCategory}</h1>
+                <h1 onClick={()=>navigate('/product',{state:item })} className="">{item.strCategory}</h1>
+                <button onClick={()=>{
+                  setModal(true)
+                  setDetails(item)
+                }} className="py-2 px-3 bg-green-500 rounded-lg text-white text-center m-auto w-fit">View</button>
               </div>
-            </Link>
+            {/* </Link> */}
+                  </>
           );
         })
       }
     </div>
+
+
+     { modal && <div className="absolute flex justify-center items-center h-screen w-full top-0 ">
+      <Modal details={details}  setModal={setModal} />
+     </div>}
 
     <AppOne/>
     </>
