@@ -1,33 +1,26 @@
-import CardData from "./Card";
-import "./App.css";
-import HomeCard from "./HomeCard";
-import State1 from "./State1";
-import UseEffect from "./UseEffect";
+import React, { useState } from "react";
+import Login from "./Login";
+import Signup from "./Signup";
 
 function App() {
 
-  const obj = [
-  
-  {
-    description:'ddfdffddfdffdfdfdfdfdf',
-    title:"best sellin",
-    img:"https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg?auto=compress&cs=tinysrgb&w=600"
-  },
-  {
-    description:'ddfdffddfdffdfdfdfdfdf',
-    title:"best sellin",
-    img:"https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg?auto=compress&cs=tinysrgb&w=600"
-  },
- 
-]
+
+  //  condition ? true : false
+
+  // state
+
+  const [status,setStatus] = useState(false);
 
   return (
     <div>
-      
+      <h1>State management</h1>
 
-       {/* <HomeC/ard/> */}
-       {/* <State1/> */}
-       <UseEffect/>
+      <div className="ms-10 mt-6">
+        <button className="border-pink-600 border px-4 shadow-lg text-pink-600 py-2 rounded-md" onClick={()=>setStatus(true)}>Login</button>
+        <button className="border-pink-600 border px-4 shadow-lg text-pink-600 py-2 rounded-md ms-2" onClick={()=>setStatus(false)}>Signup</button>
+      </div>
+
+    { status ?  <Login />  : <Signup />}
     </div>
   );
 }
